@@ -2,28 +2,11 @@ import React, { useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom'
 import Home from './components/Home'
 import BrewSteps from './components/BrewSteps'
-
-const brews = [
-  {
-    name: "firstBrew",
-    steps: [
-      "Pour some water",
-      "sift for the bigest beeenz"
-    ]
-  },
-  {
-    name: "secondBrew",
-    steps: [
-      "Pour some water",
-      "sift for the smallets beeenz"
-    ]
-  },
-
-]
+import { brews, initalBrew } from './brews.js'
 
 const App = () => {
   const history = useHistory()
-  const [brew, setBrew] = useState({})
+  const [brew, setBrew] = useState(initalBrew)
 
   const setCurrentBrew = selectedBrew => {
     // console.log(selectedBrew)
@@ -32,14 +15,20 @@ const App = () => {
         setBrew(currentBrew)
       }
     })
+  }
 
-
+  const takeMeHome = () => {
+    history.push('/')
   }
 
   return (
     <Switch>
       <Route path='/brew'>
-        <BrewSteps brew={brew} />
+        <BrewSteps
+          brew={brew}
+          history={history}
+          takeMeHome={takeMeHome}
+        />
       </Route>
       <Route path='/'>
         <Home
