@@ -1,22 +1,20 @@
 import React from 'react'
-import Dropdown from './Dropdown'
-import { NavLink } from 'react-router-dom'
+import DropdownComponent from './DropdownComponent'
 import { Jumbotron, Container } from 'reactstrap'
 
 const Home = props => {
+    const { history, setCurrentBrew, brews } = props
 
     return (
-        // <div>
-        //     <h1>Welcome to brew bot!</h1>
-        //     <NavLink to='/brew'>
-        //         <button>Start Brewing</button>
-        //     </NavLink>
-        // </div>
         <div>
             <Jumbotron fluid>
                 <Container fluid>
                     <h1 className="display-3">Welcome to Brew-Bot</h1>
-                    <p className="lead">Brewing made simple with guded steps along the way :D</p>
+                    <p className="lead">Brewing made simple with guided steps along the way... Go ahead and select  a brew from the dropdown!</p>
+                    <DropdownComponent
+                        history={history}
+                        brews={brews}
+                        setCurrentBrew={setCurrentBrew} />
                 </Container>
             </Jumbotron>
         </div>

@@ -1,28 +1,55 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom'
 import Home from './components/Home'
 import BrewSteps from './components/BrewSteps'
 
-class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      name: "I AM STATE"
-    }
+const brews = [
+  {
+    name: "firstBrew",
+    steps: [
+      "Pour some water",
+      "sift for the bigest beeenz"
+    ]
+  },
+  {
+    name: "secondBrew",
+    steps: [
+      "Pour some water",
+      "sift for the smallets beeenz"
+    ]
+  },
+
+]
+
+const App = () => {
+  const history = useHistory()
+  const [brew, setBrew] = useState({})
+
+  const setCurrentBrew = selectedBrew => {
+    // console.log(selectedBrew)
+    brews.forEach(currentBrew => {
+      if (currentBrew.name === selectedBrew) {
+        setBrew(currentBrew)
+      }
+    })
+
+
   }
 
-  render() {
-    return (
-      <Switch>
-        <Route path='/brew'>
-          <BrewSteps currentBrew={this.state.currentBrew} />
-        </Route>
-        <Route path='/'>
-          <Home />
-        </Route>
-      </Switch>
-    )
-  }
+  return (
+    <Switch>
+      <Route path='/brew'>
+        <BrewSteps brew={brew} />
+      </Route>
+      <Route path='/'>
+        <Home
+          history={history}
+          setCurrentBrew={setCurrentBrew}
+          brews={brews}
+        />
+      </Route>
+    </Switch>
+  )
 }
 
 export default App;

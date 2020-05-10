@@ -1,10 +1,13 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 
 const BrewSteps = props => {
+    const { brew } = props
 
     return (
-        null
+        <div>
+            <h1>{brew.name}</h1>
+        </div>
     )
 }
 
